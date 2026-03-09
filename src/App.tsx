@@ -12,6 +12,11 @@ function App() {
       label: <Link to="/about">About</Link>,
       icon: <InfoCircleOutlined />,
     },
+    {
+      key: '/Currying',
+      label: <Link to="/Currying">Currying</Link>,
+      icon: <InfoCircleOutlined />,
+    },
   ]
 
   return (

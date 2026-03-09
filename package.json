@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
+    "@arco-design/web-react": "^2.66.11",
+    "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.1",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "antd": "^6.3.1",
     "fabric": "^7.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.13.1",
+    "react-syntax-highlighter": "^16.1.1",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {

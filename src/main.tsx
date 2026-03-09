@@ -1,6 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { store } from './store'
 import './index.css'
 import { router } from './router'
 
@@ -9,6 +11,8 @@ import { router } from './router'
 // StrictMode 不会影响生产环境中的应用程序性能，因为它只在开发阶段启用。
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 )
