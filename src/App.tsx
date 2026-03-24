@@ -1,12 +1,19 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import './App.css'
 import { Layout, Menu } from 'antd'
-import { AppstoreOutlined, InfoCircleOutlined } from '@ant-design/icons'
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  CodeOutlined,
+  DatabaseOutlined,
+} from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
 
 function App() {
+  const location = useLocation()
+
   const menuItems = [
-    { key: '/', label: <Link to="/">fabric</Link>, icon: <AppstoreOutlined /> },
+    { key: '/', label: <Link to="/">fabric</Link>, icon: <HomeOutlined /> },
     {
       key: '/about',
       label: <Link to="/about">About</Link>,
@@ -15,21 +22,26 @@ function App() {
     {
       key: '/Currying',
       label: <Link to="/Currying">Currying</Link>,
-      icon: <InfoCircleOutlined />,
+      icon: <CodeOutlined />,
+    },
+    {
+      key: '/zustand',
+      label: <Link to="/zustand">Zustand</Link>,
+      icon: <DatabaseOutlined />,
     },
   ]
 
   return (
-    <Layout className="w-full flex">
+    <Layout className="w-full h-screen">
       <Sider width={300} collapsible theme="light">
         <Menu
           mode="inline"
           style={{ height: '100vh' }}
-          defaultSelectedKeys={['/']}
+          selectedKeys={[location.pathname]}
           items={menuItems}
         />
       </Sider>
-      <div className="flex-1 p-[20px] h-full">
+      <div className="flex-1 p-[20px] h-screen overflow-y-auto">
         <Outlet />
       </div>
     </Layout>

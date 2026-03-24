@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import { lazy, Suspense } from 'react'
 import Currying from '../pages/Currying'
+import ZustandDemo from '../pages/ZustandDemo'
 
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: 'Currying',
         element: <Currying />,
+      },
+      {
+        path: 'zustand',
+        element: <ZustandDemo />,
       },
     ],
   },
