@@ -153,9 +153,9 @@ export default function Home() {
   const addVertexControls = (polygon: Polygon) => {
     polygon.controls = {}
 
-    polygon.points.forEach((point, index) => {
+    polygon.points.forEach((_point, index) => {
       polygon.controls[`p${index}`] = new Control({
-        positionHandler: function (dim, finalMatrix, fabricObject) {
+        positionHandler: function (_dim, _finalMatrix, fabricObject: any) {
           const x = fabricObject.points[index].x - fabricObject.pathOffset.x
           const y = fabricObject.points[index].y - fabricObject.pathOffset.y
 
@@ -168,7 +168,7 @@ export default function Home() {
           )
         },
 
-        actionHandler: function (eventData, transform, x, y) {
+        actionHandler: function (_eventData, transform, x, y) {
           const polygon = transform.target as Polygon
           // 用逆矩阵将屏幕坐标转换为本地坐标
           const invertedMatrix = util.invertTransform(
@@ -294,7 +294,12 @@ export default function Home() {
       // 绘制连线
       for (let i = 0; i < newPoints.length - 1; i++) {
         const line = new Line(
-          [newPoints[i].x, newPoints[i].y, newPoints[i + 1].x, newPoints[i + 1].y],
+          [
+            newPoints[i].x,
+            newPoints[i].y,
+            newPoints[i + 1].x,
+            newPoints[i + 1].y,
+          ],
           {
             stroke: '#ff0000',
             strokeWidth: 2,
