@@ -6,7 +6,6 @@ import {
   controlsUtils,
   FabricImage,
   FabricObject,
-  Line,
   Point,
   Polygon,
   Rect,
@@ -14,6 +13,7 @@ import {
   util,
 } from 'fabric'
 import { Button, ColorPicker, Input, Upload, message } from 'antd'
+import FabricDemo from '../components/FabricDemo'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -291,26 +291,6 @@ export default function Home() {
         tempObjectsRef.current.push(circle)
       })
 
-      // 绘制连线
-      for (let i = 0; i < newPoints.length - 1; i++) {
-        const line = new Line(
-          [
-            newPoints[i].x,
-            newPoints[i].y,
-            newPoints[i + 1].x,
-            newPoints[i + 1].y,
-          ],
-          {
-            stroke: '#ff0000',
-            strokeWidth: 2,
-            selectable: false,
-            evented: false,
-          },
-        )
-        canvas.add(line)
-        tempObjectsRef.current.push(line)
-      }
-
       canvas.requestRenderAll()
     }
 
@@ -378,7 +358,7 @@ export default function Home() {
   const updateProperty = (key: string, value: any) => {
     if (!activeObject) return
 
-    activeObject.set(key as any, value)
+    activeObject.set(key, value)
     canvasRef.current?.renderAll()
 
     // 强制刷新 React
@@ -469,6 +449,7 @@ export default function Home() {
           )}
         </div>
       </div>
+      <FabricDemo width={800} height={400} />
     </>
   )
 }

@@ -6,6 +6,7 @@ import {
   InfoCircleOutlined,
   CodeOutlined,
   DatabaseOutlined,
+  ExperimentOutlined,
 } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
 
@@ -28,6 +29,11 @@ function App() {
       key: '/zustand',
       label: <Link to="/zustand">Zustand</Link>,
       icon: <DatabaseOutlined />,
+    },
+    {
+      key: '/canvas-basics',
+      label: <Link to="/canvas-basics">canvas基础</Link>,
+      icon: <ExperimentOutlined />,
     },
   ]
 

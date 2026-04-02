@@ -6,6 +6,7 @@ import ZustandDemo from '../pages/ZustandDemo'
 
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
+const CanvasBasics = lazy(() => import('../pages/CanvasBasics'))
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: 'zustand',
         element: <ZustandDemo />,
+      },
+      {
+        path: 'canvas-basics',
+        element: <CanvasBasics />,
       },
     ],
   },
