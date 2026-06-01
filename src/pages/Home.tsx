@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   Canvas,
   Circle,
@@ -365,6 +365,11 @@ export default function Home() {
     forceUpdate((n) => n + 1)
   }
 
+  const fabricDemoEl = useMemo(
+    () => <FabricDemo width={800} height={400} />,
+    [],
+  )
+
   return (
     <>
       <div className="flex gap-x-[4px]">
@@ -449,7 +454,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <FabricDemo width={800} height={400} />
+      {fabricDemoEl}
     </>
   )
 }

@@ -35,6 +35,11 @@ function App() {
       label: <Link to="/canvas-basics">canvas基础</Link>,
       icon: <ExperimentOutlined />,
     },
+    {
+      key: '/hooks-example',
+      label: <Link to="/hooks-example">Hook 使用与示例</Link>,
+      icon: <CodeOutlined />,
+    },
   ]
 
   return (

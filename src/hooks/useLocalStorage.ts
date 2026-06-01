@@ -20,3 +20,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
   return [value, setValue] as const
 }
+
+// 使用示例： const [theme, setTheme] = useLocalStorage('theme', 'light')
+// 在组件中，可以通过 setTheme('dark') 来改变主题，并且这个值会被保存在 localStorage 中，即使刷新页面也能保持。

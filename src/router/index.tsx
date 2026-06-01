@@ -3,6 +3,7 @@ import App from '../App'
 import { lazy, Suspense } from 'react'
 import Currying from '../pages/Currying'
 import ZustandDemo from '../pages/ZustandDemo'
+import UseHook from '../pages/UseHook'
 
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: 'canvas-basics',
         element: <CanvasBasics />,
+      },
+      {
+        path: 'hooks-example',
+        element: <UseHook />,
       },
     ],
   },
