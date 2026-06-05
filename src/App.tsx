@@ -7,6 +7,7 @@ import {
   CodeOutlined,
   DatabaseOutlined,
   ExperimentOutlined,
+  ApiOutlined,
 } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
 
@@ -39,6 +40,11 @@ function App() {
       key: '/hooks-example',
       label: <Link to="/hooks-example">Hook 使用与示例</Link>,
       icon: <CodeOutlined />,
+    },
+    {
+      key: '/swr',
+      label: <Link to="/swr">SWR 数据请求</Link>,
+      icon: <ApiOutlined />,
     },
   ]
 

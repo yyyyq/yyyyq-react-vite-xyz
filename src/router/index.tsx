@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react'
 import Currying from '../pages/Currying'
 import ZustandDemo from '../pages/ZustandDemo'
 import UseHook from '../pages/UseHook'
+import SWRDemo from '../pages/SWRDemo'
 
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: 'hooks-example',
         element: <UseHook />,
+      },
+      {
+        path: 'swr',
+        element: <SWRDemo />,
       },
     ],
   },
