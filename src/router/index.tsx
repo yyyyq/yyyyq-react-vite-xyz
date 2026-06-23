@@ -9,6 +9,7 @@ import SWRDemo from '../pages/SWRDemo'
 const Home = lazy(() => import('../pages/Home'))
 const About = lazy(() => import('../pages/About'))
 const CanvasBasics = lazy(() => import('../pages/CanvasBasics'))
+const JSInterview = lazy(() => import('../pages/JSInterview'))
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: 'swr',
         element: <SWRDemo />,
+      },
+      {
+        path: 'js-interview',
+        element: <JSInterview />,
       },
     ],
   },

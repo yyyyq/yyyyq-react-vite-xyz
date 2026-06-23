@@ -8,6 +8,7 @@ import {
   DatabaseOutlined,
   ExperimentOutlined,
   ApiOutlined,
+  ReadOutlined,
 } from '@ant-design/icons'
 import Sider from 'antd/es/layout/Sider'
 
@@ -45,6 +46,11 @@ function App() {
       key: '/swr',
       label: <Link to="/swr">SWR 数据请求</Link>,
       icon: <ApiOutlined />,
+    },
+    {
+      key: '/js-interview',
+      label: <Link to="/js-interview">JS interview</Link>,
+      icon: <ReadOutlined />,
     },
   ]
 
