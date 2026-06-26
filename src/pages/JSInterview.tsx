@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import Markdown from '@/components/Markdown'
 import GC from './md/GC.md?raw'
+import EventLoop from './md/EventLoop.md?raw'
+import Promise from './md/Promise.md?raw'
 
 // ========== 配置区：新增 MD 内容时在这里添加即可 ==========
 const MD_LIST: { key: string; label: string; content: string }[] = [
   { key: 'gc', label: '垃圾回收', content: GC },
+  { key: 'eventLoop', label: '事件循环', content: EventLoop },
+  { key: 'promise', label: 'Promise', content: Promise },
   // 新增示例：
   // { key: 'closure', label: '闭包', content: ClosureMD },
   // { key: 'promise', label: 'Promise', content: PromiseMD },
