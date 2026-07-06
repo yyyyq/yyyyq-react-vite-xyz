@@ -23,5 +23,5 @@
 <font style='color: red'>减少重绘和回流的方法：</font>
 1. 避免频繁的操作样式，最好将样式集中起来修改
 2. 避免频繁的操作DOM，可以使用DocumentFragment创建一个文档片段，在文档片段上进行操作，最后一次性添加到DOM中
-3. 避免频繁读取offsetWidth、scrollTop等属性，因为这些属性会触发回流
+3. 避免频繁读取offsetWidth、scrollTop等属性，因为这些属性会触发回流  
 优化点：尽量使用重绘而不是回流，因为回流的开销更大。transform和opacity可以触发重绘，而width、height、margin、padding等会触发回流。

@@ -9,7 +9,7 @@ import markdownItHighlight from 'markdown-it-highlightjs'
 import '@/styles/markdown.css'
 import 'highlight.js/styles/github.css'
 
-const md = new MarkdownIt()
+const md = new MarkdownIt({ html: true })
 md.use(markdownItHighlight, { hljs })
 
 const Markdown = ({ content }: { content?: string }) => {
