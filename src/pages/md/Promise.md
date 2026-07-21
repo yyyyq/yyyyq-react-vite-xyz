@@ -87,6 +87,7 @@ Promise 的作用：
     console.log(values);
   });
   ```
+  
   - Promise.race
   race方法接收一个Promise实例数组，返回一个新的Promise实例。当数组中任意一个Promise实例变为fulfilled状态时，新的Promise实例就会变为fulfilled状态，此时返回值是第一个变为fulfilled状态的Promise实例的返回值。如果有一个Promise实例变为rejected状态，新的Promise实例就会变为rejected状态，此时返回值是第一个变为rejected状态的Promise实例的返回值。
   ```js
@@ -117,4 +118,166 @@ Promise 的作用：
 
   //[{status: "fulfilled", value: 3}...]
   //[{status: "rejected", reason: "error"}...]
+  ```
+
+#### 5. 手写Promise
+  1. 链式调用,then
+  ```js
+  class MyPromise{
+    constructor(executor){
+      // 定义状态与回调
+      this.status = 'pending';
+      this.value = undefined;
+      this.reason = undefined;
+      this.onFulfilledCallbacks = [];
+      this.onRejectedCallbacks = [];
+
+      // 定义resolve和reject函数
+      const resolve = (value)=>{
+        if(this.status === 'pending'){
+          this.status = 'fulfilled';
+          this.value = value;
+          this.onFulfilledCallbacks.forEach(fn=>fn());
+        }
+      }
+
+      const reject = (reason)=>{
+        if(this.status === 'pending'){
+          this.status = 'rejected';
+          this.reason = reason;
+          this.onRejectedCallbacks.forEach(fn=>fn());
+        }
+      }
+
+      // 执行executor函数，立即同步执行
+      try{
+        executor(resolve,reject);
+      }catch(err){
+        reject(err);
+      }
+    }
+    // 链式调用，then方法return 一个新的Promise对象
+    then(onFulfilled,onRejected){
+      // 返回一个新的Promise对象
+      const promise2 = new MyPromise((resolve,reject)=>{
+        const fulfilledTask = ()=>{
+          queueMicrotask(()=>{
+            try {
+              const res = onFulfilled(this.value);
+              this.resolvePromise(promise2, res, resolve, reject);
+            }catch(err){
+              reject(err);
+            }
+          })
+        }
+
+        const rejectedTask = ()=>{
+          queueMicrotask(()=>{
+            try{
+              const res = onRejected(this.reason);
+              this.resolvePromise(promise2, res, resolve, reject);
+            }catch(err){
+              reject(err);
+            }
+          })
+        }
+
+        // 如果状态为fulfilled，执行onFulfilled
+        if(this.status === 'fulfilled'){
+          fulfilledTask()
+        }
+        // 如果状态为rejected，执行onRejected
+        if(this.status === 'rejected'){
+          rejectedTask()
+        }
+        // 如果状态为pending，将回调函数存入数组
+        if(this.status === 'pending'){
+          this.onFulfilledCallbacks.push(()=>fulfilledTask())
+          this.onRejectedCallbacks.push(()=>rejectedTask())
+        }        
+      })
+      return promise2
+    }
+
+    resolvePromise(promise2, x, resolve, reject) {
+      if (promise2 === x) return reject(new TypeError('Chaining cycle'));
+      if (x instanceof MyPromise) {
+        x.then(resolve, reject);
+      } else if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
+        let called = false;
+        try {
+          const then = x.then;
+          if (typeof then === 'function') {
+            then.call(
+              x,
+              y => { if (!called) { called = true; this.resolvePromise(promise2, y, resolve, reject); } },
+              r => { if (!called) { called = true; reject(r); } }
+            );
+          } else {
+            resolve(x);
+          }
+        } catch (e) {
+          if (!called) reject(e);
+        }
+      } else {
+        resolve(x);
+      }
+    }
+  }
+  
+  // 使用
+  const promise = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('success');
+    })
+  })
+  promise.then((res)=>{
+    console.log(res);
+  })
+  ```
+
+  2. 错误处理
+  ```js
+  class MyPromise{
+    constructor(executor){
+      // 定义状态与回调
+     // 同上...
+
+      // 定义resolve和reject函数
+      // 同上...
+    
+
+      // 执行executor函数，立即同步执行
+      try{
+        executor(resolve,reject);
+      }catch(err){
+        reject(err);
+      }
+    }
+    // 链式调用，then方法
+    // 同上...
+
+    catch(onRejected){
+      return this.then(null,onRejected);
+    }
+
+    finally(onFinally){
+      return this.then(
+        value => MyPromise.resolve(onFinally()).then(() => value),
+        reason => MyPromise.resolve(onFinally()).then(() => { throw reason })
+      );
+    }
+  }
+
+  // 使用
+  const promise = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('success');
+    })
+  })
+  promise.then((res)=>{
+    console.log(res);
+  }).catch((err)=>{
+    console.log(err);
+    })
   ```
